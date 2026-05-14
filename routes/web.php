@@ -75,11 +75,11 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('goals', GoalController::class);
 
     // ─── PROFILE ──────────────────────────────────────────────────────────
-    Route::prefix('profile')->name('profile')->group(function () {
-        Route::get('/', [ProfileController::class, 'index'])->name('');          // /profile
-        Route::put('/', [ProfileController::class, 'update']);                   // PUT /profile
-        Route::put('/password', [ProfileController::class, 'updatePassword'])->name('.password'); // /profile/password
-        Route::put('/locale', [ProfileController::class, 'updateLocale'])->name('.locale');
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [ProfileController::class, 'index'])->name('profile');          // /profile
+        Route::put('/', [ProfileController::class, 'update'])->name('profile.update');                   // PUT /profile
+        Route::put('/password', [ProfileController::class, 'updatePassword'])->name('profile.password'); // /profile/password
+        Route::put('/locale', [ProfileController::class, 'updateLocale'])->name('profile.locale');
     });
 
 });

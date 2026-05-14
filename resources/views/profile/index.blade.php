@@ -37,7 +37,7 @@
         {{-- Update Profile Form --}}
         <div class="form-card mb-4">
             <h3 class="form-card-title"><i class="bi bi-person-fill me-2"></i>Update Profile</h3>
-            <form method="POST" action="{{ route('profile') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
                 @csrf @method('PUT')
 
                 <div class="row g-3">

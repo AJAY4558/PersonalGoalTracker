@@ -23,6 +23,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Trust Render's reverse proxy so HTTPS URLs are generated correctly
+        $middleware->trustProxies(at: '*');
+
         // Register SetLocale as a global web middleware
         // It runs on every web request to set the application locale
         $middleware->web(append: [

@@ -32,10 +32,6 @@ class GoalController extends Controller
      * Apply auth middleware to all methods.
      * Only authenticated users can manage goals.
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     // ─────────────────────────────────────────────
     // INDEX — List all goals with search/filter

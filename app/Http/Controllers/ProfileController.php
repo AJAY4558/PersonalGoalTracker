@@ -21,10 +21,6 @@ use Illuminate\Validation\Rules\Password;
  */
 class ProfileController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /** Show profile page */
     public function index()
@@ -84,11 +80,11 @@ class ProfileController extends Controller
     /** Update locale preference */
     public function updateLocale(Request $request)
     {
-        $request->validate(['locale' => ['required', 'in:en,hi']]);
+        $validated = $request->validate(['locale' => ['required', 'in:en,hi']]);
 
-        Auth::user()->update(['locale' => $request->locale]);
-        session(['locale' => $request->locale]);
-        app()->setLocale($request->locale);
+        Auth::user()->update(['locale' => $validated['locale']]);
+        session(['locale' => $validated['locale']]);
+        app()->setLocale($validated['locale']);
 
         return back()->with('success', 'Language preference saved!');
     }

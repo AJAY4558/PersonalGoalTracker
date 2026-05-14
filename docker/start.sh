@@ -19,10 +19,9 @@ chown www-data:www-data /var/www/html/database/database.sqlite
 # Run migrations
 php artisan migrate --force
 
-# Cache configuration, routes, views for speed
+# Cache configuration and routes for speed (NOT views — asset() URLs must stay dynamic)
 php artisan config:cache
 php artisan route:cache
-php artisan view:cache
 
 # Create storage symlink (public/storage → storage/app/public)
 php artisan storage:link || true

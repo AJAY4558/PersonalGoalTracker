@@ -3,11 +3,11 @@ FROM php:8.2-apache
 # Install only strictly required system libraries
 RUN apt-get update && apt-get install -y \
     git curl zip unzip \
-    libzip-dev libsqlite3-dev libonig-dev \
+    libzip-dev libsqlite3-dev libonig-dev libpq-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install only the PHP extensions Laravel needs
-RUN docker-php-ext-install pdo pdo_sqlite mbstring zip
+# Install PHP extensions (pdo_pgsql for Render PostgreSQL, pdo_sqlite as fallback)
+RUN docker-php-ext-install pdo pdo_pgsql pdo_sqlite mbstring zip
 
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer

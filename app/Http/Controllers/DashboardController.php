@@ -67,17 +67,18 @@ class DashboardController extends Controller
             ->groupBy('categories.id', 'categories.name', 'categories.color')
             ->get();
 
-        // === GOALS BY MONTH (for line chart) ===
-        $goalsByMonth = DB::table('goals')
-            ->where('user_id', $userId)
+        // === GOALS BY MONTH (for line chart) — DB-agnostic, computed in PHP ===
+        $goalsByMonthRaw = Goal::where('user_id', $userId)
             ->where('created_at', '>=', now()->subMonths(6))
-            ->select(
-                DB::raw("DATE_FORMAT(created_at, '%b %Y') as month"),
-                DB::raw('count(*) as total')
-            )
-            ->groupBy('month')
             ->orderBy('created_at')
-            ->get();
+            ->get()
+            ->groupBy(fn($g) => $g->created_at->format('M Y'))
+            ->map(fn($g) => $g->count());
+
+        $goalsByMonth = $goalsByMonthRaw->map(fn($total, $month) => [
+            'month' => $month,
+            'total' => $total,
+        ])->values();
 
         return view('dashboard.index', compact(
             'totalGoals',

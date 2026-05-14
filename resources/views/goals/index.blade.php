@@ -79,7 +79,7 @@
                 {{-- Goal Card Header --}}
                 <div class="goal-card-header">
                     <div class="goal-card-badges">
-                        <span class="badge {{ $goal->status_badge['class'] }}">{{ $goal->status_badge['label'] }}</span>
+                        <span class="badge status-badge {{ $goal->status_badge['class'] }}">{{ $goal->status_badge['label'] }}</span>
                         <span class="badge {{ $goal->priority_badge['class'] }}">{{ $goal->priority_badge['label'] }}</span>
                     </div>
                     @if($goal->is_overdue)

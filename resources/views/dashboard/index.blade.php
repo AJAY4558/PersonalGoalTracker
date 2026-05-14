@@ -184,14 +184,14 @@ new Chart(document.getElementById('statusChart'), {
         labels: ['Completed', 'In Progress', 'Pending', 'Cancelled'],
         datasets: [{
             data: [{{ $completedGoals }}, {{ $inProgressGoals }}, {{ $pendingGoals }}, {{ $cancelledGoals }}],
-            backgroundColor: ['#22c55e', '#6366f1', '#f59e0b', '#ef4444'],
+            backgroundColor: ['#4ec9b0', '#007acc', '#dcdcaa', '#f44747'],
             borderWidth: 0,
         }]
     },
     options: {
         responsive: true,
         plugins: {
-            legend: { position: 'bottom', labels: { color: '#94a3b8' } }
+            legend: { position: 'bottom', labels: { color: '#858585' } }
         },
         cutout: '70%',
     }
@@ -214,8 +214,8 @@ new Chart(document.getElementById('categoryChart'), {
         responsive: true,
         plugins: { legend: { display: false } },
         scales: {
-            x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
-            y: { ticks: { color: '#94a3b8', stepSize: 1 }, beginAtZero: true }
+            x: { ticks: { color: '#858585' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+            y: { ticks: { color: '#858585', stepSize: 1 }, grid: { color: 'rgba(255,255,255,0.05)' }, beginAtZero: true }
         }
     }
 });
@@ -229,19 +229,19 @@ new Chart(document.getElementById('trendChart'), {
         datasets: [{
             label: 'Goals Created',
             data: trendData.map(d => d.total),
-            borderColor: '#6366f1',
-            backgroundColor: 'rgba(99,102,241,0.1)',
+            borderColor: '#007acc',
+            backgroundColor: 'rgba(0,122,204,0.1)',
             fill: true,
             tension: 0.4,
-            pointBackgroundColor: '#6366f1',
+            pointBackgroundColor: '#007acc',
         }]
     },
     options: {
         responsive: true,
         plugins: { legend: { display: false } },
         scales: {
-            x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
-            y: { ticks: { color: '#94a3b8', stepSize: 1 }, beginAtZero: true }
+            x: { ticks: { color: '#858585' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+            y: { ticks: { color: '#858585', stepSize: 1 }, grid: { color: 'rgba(255,255,255,0.05)' }, beginAtZero: true }
         }
     }
 });

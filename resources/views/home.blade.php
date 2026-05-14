@@ -36,7 +36,8 @@
             <div class="row align-items-center min-vh-100 py-5">
                 <div class="col-lg-6">
                     <span class="hero-badge">✨ Built for Ambition</span>
-                    <h1 class="hero-title">Reach Higher.<br><span class="gradient-text">Achieve Everything.</span></h1>
+                    <h1 class="hero-title">Reach Higher.</h1>
+                    <div class="hero-title-gradient">Achieve Everything.</div>
                     <p class="hero-subtitle">
                         A powerful personal goal tracking system built with Laravel. Set deadlines,
                         track progress, stay motivated, and reach every milestone.

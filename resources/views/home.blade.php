@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Personal Goal Tracker — Set, track, and achieve your personal goals with ease.">
-    <title>Personal Goal Tracker — Achieve More Every Day</title>
+    <meta name="description" content="Altair — Built for Ambition. Set, track, and achieve your goals.">
+    <title>Altair — Built for Ambition</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -16,7 +16,7 @@
     {{-- NAVBAR --}}
     <nav class="landing-nav">
         <div class="container-xl d-flex align-items-center justify-content-between">
-            <a href="{{ route('home') }}" class="landing-brand">🎯 GoalTracker</a>
+            <a href="{{ route('home') }}" class="landing-brand">✦ Altair</a>
             <div class="landing-nav-links">
                 <a href="{{ route('locale.switch', 'en') }}" class="btn btn-sm btn-outline-secondary me-1">EN</a>
                 <a href="{{ route('locale.switch', 'hi') }}" class="btn btn-sm btn-outline-secondary me-2">HI</a>
@@ -35,8 +35,8 @@
         <div class="container-xl">
             <div class="row align-items-center min-vh-100 py-5">
                 <div class="col-lg-6">
-                    <span class="hero-badge">🚀 Laravel MVC Application</span>
-                    <h1 class="hero-title">Turn Your Dreams Into<br><span class="gradient-text">Achieved Goals</span></h1>
+                    <span class="hero-badge">✨ Built for Ambition</span>
+                    <h1 class="hero-title">Reach Higher.<br><span class="gradient-text">Achieve Everything.</span></h1>
                     <p class="hero-subtitle">
                         A powerful personal goal tracking system built with Laravel. Set deadlines,
                         track progress, stay motivated, and reach every milestone.
@@ -67,7 +67,7 @@
                                 <span class="preview-dot red"></span>
                                 <span class="preview-dot yellow"></span>
                                 <span class="preview-dot green"></span>
-                                <span class="ms-2 small text-muted">GoalTracker Dashboard</span>
+                                <span class="ms-2 small text-muted">Altair Dashboard</span>
                             </div>
                             <div class="preview-stats">
                                 <div class="preview-stat-card blue">
@@ -142,8 +142,8 @@
     {{-- CTA --}}
     <section class="cta-section py-5">
         <div class="container-xl text-center">
-            <h2 class="cta-title">Ready to achieve your goals?</h2>
-            <p class="cta-subtitle">Join thousands of goal-setters and start tracking today.</p>
+            <h2 class="cta-title">Ambition deserves the right tool.</h2>
+            <p class="cta-subtitle">Join Altair and start turning your goals into achievements today.</p>
             <a href="{{ route('register') }}" class="btn btn-primary btn-lg mt-3">
                 <i class="bi bi-rocket-takeoff me-2"></i> Get Started — It's Free
             </a>
@@ -152,7 +152,7 @@
 
     <footer class="landing-footer">
         <div class="container-xl text-center">
-            <p>© {{ date('Y') }} GoalTracker. Built with Laravel {{ app()->version() }} for BTech MVC Syllabus.</p>
+            <p>© {{ date('Y') }} Altair — Built for Ambition.</p>
         </div>
     </footer>
 

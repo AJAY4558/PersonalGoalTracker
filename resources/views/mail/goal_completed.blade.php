@@ -50,7 +50,7 @@
     <a href="{{ url('/goals') }}" class="btn-cta">📊 View All Goals</a>
   </div>
   <div class="email-footer">
-    <p>© {{ date('Y') }} GoalTracker — Sent to {{ $user->email }}</p>
+    <p>© {{ date('Y') }} Altair — Sent to {{ $user->email }}</p>
   </div>
 </div>
 </body>

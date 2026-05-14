@@ -23,7 +23,7 @@ class WelcomeMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Welcome to Personal Goal Tracker! 🎯',
+            subject: 'Welcome to Altair — Built for Ambition! ✨',
         );
     }
 

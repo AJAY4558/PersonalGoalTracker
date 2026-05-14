@@ -23,8 +23,8 @@
 <div class="email-wrapper">
   <div class="email-header">
     <div class="email-logo">🎯</div>
-    <h1>Welcome to GoalTracker!</h1>
-    <p>Your journey to success starts now</p>
+    <h1>Welcome to Altair!</h1>
+    <p>Built for Ambition — Your journey starts now</p>
   </div>
   <div class="email-body">
     <h2>Hello, {{ $user->name }}! 👋</h2>
@@ -44,7 +44,7 @@
     <p style="color:#94a3b8;font-size:13px">If you did not create this account, you can safely ignore this email.</p>
   </div>
   <div class="email-footer">
-    <p>© {{ date('Y') }} GoalTracker — Personal Goal Management System</p>
+    <p>© {{ date('Y') }} Altair — Built for Ambition</p>
     <p>This email was sent to {{ $user->email }}</p>
   </div>
 </div>

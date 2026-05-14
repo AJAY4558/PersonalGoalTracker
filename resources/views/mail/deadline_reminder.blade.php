@@ -47,7 +47,7 @@
     <a href="{{ url('/goals/' . $goal->id) }}" class="btn-cta">🎯 View & Update Goal</a>
   </div>
   <div class="email-footer">
-    <p>© {{ date('Y') }} GoalTracker — Sent to {{ $user->email }}</p>
+    <p>© {{ date('Y') }} Altair — Sent to {{ $user->email }}</p>
     <p>You're receiving this because you have a goal with an upcoming deadline.</p>
   </div>
 </div>

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Personal Goal Tracker — Login and Register">
-    <title>@yield('title', 'Welcome') — GoalTracker</title>
+    <meta name="description" content="Altair — Built for Ambition. Login and get started.">
+    <title>@yield('title', 'Welcome') — Altair</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">

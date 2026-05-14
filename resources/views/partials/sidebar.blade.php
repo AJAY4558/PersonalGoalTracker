@@ -5,8 +5,8 @@
     {{-- Brand Logo --}}
     <div class="sidebar-brand">
         <a href="{{ route('home') }}" class="brand-link">
-            <span class="brand-icon">🎯</span>
-            <span class="brand-text">GoalTracker</span>
+            <span class="brand-icon">✦</span>
+            <span class="brand-text">Altair</span>
         </a>
         <button class="sidebar-toggle d-lg-none" id="sidebarClose">
             <i class="bi bi-x-lg"></i>

@@ -3,7 +3,10 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GoalController;
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\GroupTaskController;
 use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -68,6 +71,20 @@ Route::middleware(['auth'])->group(function () {
 
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::post('/notifications/mark-read', [NotificationController::class, 'markRead'])->name('notifications.mark-read');
+
+    Route::get('/groups', [GroupController::class, 'index'])->name('groups.index');
+    Route::post('/groups', [GroupController::class, 'store'])->name('groups.store');
+    Route::post('/groups/join-code', [GroupController::class, 'joinCode'])->name('groups.join-code');
+    Route::get('/groups/join/{token}', [GroupController::class, 'join'])->name('groups.join');
+    Route::post('/groups/invites/{invite}/decline', [GroupController::class, 'declineInvite'])->name('groups.invites.decline');
+    Route::get('/groups/{group}', [GroupController::class, 'show'])->name('groups.show');
+    Route::post('/groups/{group}/invite', [GroupController::class, 'invite'])->name('groups.invite');
+    Route::post('/groups/{group}/tasks', [GroupTaskController::class, 'store'])->name('groups.tasks.store');
+    Route::patch('/groups/{group}/tasks/{task}/progress', [GroupTaskController::class, 'updateProgress'])->name('groups.tasks.progress');
+    Route::patch('/groups/{group}/tasks/{task}/cancel', [GroupTaskController::class, 'cancel'])->name('groups.tasks.cancel');
+    Route::delete('/groups/{group}/leave', [GroupController::class, 'leave'])->name('groups.leave');
 
     // ─── GOALS — Resource Routes ──────────────────────────────────────────
     // Generates: index, create, store, show, edit, update, destroy

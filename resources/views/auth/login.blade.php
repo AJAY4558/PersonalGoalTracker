@@ -8,7 +8,7 @@
         <div class="auth-card-header">
             <div class="auth-logo">🎯</div>
             <h2>{{ __('messages.auth.login') }}</h2>
-            <p>Welcome back! Track your goals.</p>
+            <p>Elite Performance</p>
         </div>
 
         {{-- Login Form --}}

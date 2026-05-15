@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * User Model
@@ -60,6 +61,33 @@ class User extends Authenticatable
     public function goals(): HasMany
     {
         return $this->hasMany(Goal::class);
+    }
+
+    public function createdGroups(): HasMany
+    {
+        return $this->hasMany(Group::class, 'created_by');
+    }
+
+    public function groups(): BelongsToMany
+    {
+        return $this->belongsToMany(Group::class, 'group_members')
+            ->withPivot('role', 'joined_at')
+            ->withTimestamps();
+    }
+
+    public function groupMemberships(): HasMany
+    {
+        return $this->hasMany(GroupMember::class);
+    }
+
+    public function groupTaskAssignments(): HasMany
+    {
+        return $this->hasMany(GroupTaskAssignment::class);
+    }
+
+    public function appNotifications(): HasMany
+    {
+        return $this->hasMany(AppNotification::class);
     }
 
     /**

@@ -7,12 +7,12 @@
     @method('PUT')
 @endisset
 
-<div class="row g-3">
+<div class="objective-grid">
 
     {{-- Title --}}
-    <div class="col-12">
+    <div class="objective-panel bento-item full">
         <label for="title" class="form-label fw-semibold">
-            {{ __('messages.goal.title') }} <span class="text-danger">*</span>
+            Objective Identity <span class="text-danger">*</span>
         </label>
         <input type="text" id="title" name="title"
             class="form-control form-control-lg @error('title') is-invalid @enderror"
@@ -22,11 +22,12 @@
         @error('title')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
+        <div class="objective-hint">{{ __('messages.goal.title') }} anchors the strategic schema.</div>
     </div>
 
     {{-- Description --}}
-    <div class="col-12">
-        <label for="description" class="form-label fw-semibold">{{ __('messages.goal.description') }}</label>
+    <div class="objective-panel bento-item full">
+        <label for="description" class="form-label fw-semibold">Contextual Roadmap</label>
         <textarea id="description" name="description" rows="4"
             class="form-control @error('description') is-invalid @enderror"
             placeholder="Describe your goal in detail...">{{ old('description', $goal->description ?? '') }}</textarea>
@@ -34,7 +35,7 @@
     </div>
 
     {{-- Category --}}
-    <div class="col-md-6">
+    <div class="objective-panel bento-item">
         <label for="category_id" class="form-label fw-semibold">{{ __('messages.goal.category') }}</label>
         <select id="category_id" name="category_id"
             class="form-select @error('category_id') is-invalid @enderror">
@@ -50,8 +51,8 @@
     </div>
 
     {{-- Deadline --}}
-    <div class="col-md-6">
-        <label for="deadline" class="form-label fw-semibold">{{ __('messages.goal.deadline') }}</label>
+    <div class="objective-panel bento-item">
+        <label for="deadline" class="form-label fw-semibold">Deployment Window</label>
         <input type="date" id="deadline" name="deadline"
             class="form-control @error('deadline') is-invalid @enderror"
             value="{{ old('deadline', isset($goal) && $goal->deadline ? $goal->deadline->format('Y-m-d') : '') }}"
@@ -60,7 +61,7 @@
     </div>
 
     {{-- Status --}}
-    <div class="col-md-4">
+    <div class="objective-panel bento-item third">
         <label for="status" class="form-label fw-semibold">{{ __('messages.goal.status') }} <span class="text-danger">*</span></label>
         <select id="status" name="status" class="form-select @error('status') is-invalid @enderror" required>
             @foreach(['pending','in_progress','completed','cancelled'] as $s)
@@ -73,8 +74,8 @@
     </div>
 
     {{-- Priority --}}
-    <div class="col-md-4">
-        <label for="priority" class="form-label fw-semibold">{{ __('messages.goal.priority') }} <span class="text-danger">*</span></label>
+    <div class="objective-panel bento-item third">
+        <label for="priority" class="form-label fw-semibold">Strategic Importance <span class="text-danger">*</span></label>
         <select id="priority" name="priority" class="form-select @error('priority') is-invalid @enderror" required>
             @foreach(['low','medium','high','critical'] as $p)
                 <option value="{{ $p }}" {{ old('priority', $goal->priority ?? 'medium') === $p ? 'selected' : '' }}>
@@ -86,9 +87,9 @@
     </div>
 
     {{-- Progress --}}
-    <div class="col-md-4">
+    <div class="objective-panel bento-item third">
         <label for="progress" class="form-label fw-semibold">
-            {{ __('messages.goal.progress') }}: <span id="progress-value">{{ old('progress', $goal->progress ?? 0) }}%</span>
+            Performance Metric: <span id="progress-value">{{ old('progress', $goal->progress ?? 0) }}%</span>
         </label>
         <input type="range" id="progress" name="progress"
             class="form-range @error('progress') is-invalid @enderror"
@@ -99,7 +100,7 @@
     </div>
 
     {{-- Image / File Upload --}}
-    <div class="col-12">
+    <div class="objective-panel bento-item full">
         <label for="image" class="form-label fw-semibold">{{ __('messages.goal.image') }}</label>
 
         @isset($goal)

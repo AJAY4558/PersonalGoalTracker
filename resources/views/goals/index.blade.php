@@ -4,6 +4,24 @@
 
 @section('content')
 
+<div class="goals-header mb-4">
+    <div>
+        <h2>My Goals</h2>
+        <div class="goals-tabs">
+            <button type="button" class="active" data-goal-tab="active">Active</button>
+            <button type="button" data-goal-tab="archived">Archived</button>
+            <button type="button" data-goal-tab="strategy">Strategy</button>
+        </div>
+    </div>
+</div>
+
+<div class="category-pill-row mb-4">
+    <button type="button" class="category-filter-pill active" data-category-filter="all">All Domains</button>
+    <button type="button" class="category-filter-pill" data-category-filter="financial-mastery">Financial Mastery</button>
+    <button type="button" class="category-filter-pill" data-category-filter="peak-performance">Peak Performance</button>
+    <button type="button" class="category-filter-pill" data-category-filter="intellectual-capital">Intellectual Capital</button>
+</div>
+
 {{-- ── FILTER & SEARCH BAR ──────────────────────────────────────────────── --}}
 <div class="goals-toolbar mb-4">
     <form method="GET" action="{{ route('goals.index') }}" id="filterForm" class="d-flex flex-wrap gap-2 align-items-center">
@@ -74,7 +92,7 @@
 @else
     <div class="row g-3 mb-4">
         @foreach($goals as $goal)
-        <div class="col-md-6 col-xl-4">
+        <div class="col-md-6 col-xl-4 goal-filter-card" data-status="{{ $goal->status }}" data-category="{{ $goal->category ? Str::slug($goal->category->name) : 'uncategorized' }}">
             <div class="goal-card {{ $goal->is_overdue ? 'goal-overdue' : '' }}">
                 {{-- Goal Card Header --}}
                 <div class="goal-card-header">
@@ -166,5 +184,60 @@
         {{ $goals->links('pagination::bootstrap-5') }}
     </div>
 @endif
+
+@push('scripts')
+<script>
+const goalCards = Array.from(document.querySelectorAll('.goal-filter-card'));
+const tabButtons = Array.from(document.querySelectorAll('[data-goal-tab]'));
+const categoryButtons = Array.from(document.querySelectorAll('[data-category-filter]'));
+let activeTab = 'active';
+let activeCategory = 'all';
+
+function applyGoalFilters() {
+    const activeStatuses = ['active', 'in_progress', 'pending'];
+    const archivedStatuses = ['archived', 'completed', 'cancelled'];
+
+    goalCards.forEach((card) => {
+        const status = card.dataset.status;
+        const category = card.dataset.category;
+        const tabMatch = activeTab === 'strategy'
+            || (activeTab === 'active' && activeStatuses.includes(status))
+            || (activeTab === 'archived' && archivedStatuses.includes(status));
+        const categoryMatch = activeCategory === 'all' || category === activeCategory;
+        card.classList.toggle('d-none', !(tabMatch && categoryMatch));
+    });
+}
+
+tabButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        activeTab = button.dataset.goalTab;
+        tabButtons.forEach((item) => item.classList.toggle('active', item === button));
+        applyGoalFilters();
+    });
+});
+
+categoryButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        activeCategory = button.dataset.categoryFilter;
+        categoryButtons.forEach((item) => item.classList.toggle('active', item === button));
+        applyGoalFilters();
+    });
+});
+
+applyGoalFilters();
+</script>
+@endpush
+
+<div class="deep-work-bar d-none d-lg-flex">
+    <div class="deep-work-label">
+        <span class="deep-work-dot active-pulse"></span>
+        DEEP WORK SYNC ACTIVE
+    </div>
+    <div class="deep-work-stats">
+        <span>Biometric Stability <strong>98.4%</strong></span>
+        <span>Sync Latency <strong>12ms</strong></span>
+    </div>
+    <button type="button" class="btn btn-sm btn-outline-secondary">Suspend Session</button>
+</div>
 
 @endsection

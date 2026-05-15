@@ -18,7 +18,7 @@
 {{-- ── STATS CARDS ─────────────────────────────────────────────────────── --}}
 <div class="row g-3 mb-4">
     <div class="col-sm-6 col-xl-3">
-        <div class="stat-card blue">
+        <div class="stat-card blue shimmer-border">
             <div class="stat-icon"><i class="bi bi-bullseye"></i></div>
             <div class="stat-body">
                 <div class="stat-num">{{ $totalGoals }}</div>
@@ -83,7 +83,7 @@
 
     {{-- Line Chart: Goals created per month --}}
     <div class="col-lg-4">
-        <div class="chart-card">
+        <div class="chart-card inner-glow-primary">
             <div class="chart-card-header">
                 <h3 class="chart-title">Monthly Trend</h3>
             </div>
@@ -100,12 +100,14 @@
     <div class="col-lg-6">
         <div class="dash-card">
             <div class="dash-card-header">
-                <h3><i class="bi bi-calendar-event me-2"></i>{{ __('messages.dashboard.upcoming') }}</h3>
+                <h3><i class="bi bi-person text-primary me-2"></i>My Deadlines</h3>
                 <a href="{{ route('goals.index') }}?sort=deadline&order=asc" class="btn btn-sm btn-outline-primary">View All</a>
             </div>
             <div class="dash-card-body">
-                @forelse($upcomingGoals as $goal)
-                <div class="upcoming-goal-item">
+                @forelse($upcomingPersonalGoals as $goal)
+                @php($urgency = $goal->days_remaining <= 1 ? 'urgency-red' : ($goal->days_remaining <= 3 ? 'urgency-orange' : 'urgency-primary'))
+                <div class="upcoming-goal-item deadline-item">
+                    <span class="urgency-dot {{ $urgency }}"></span>
                     <div class="upcoming-goal-info">
                         <a href="{{ route('goals.show', $goal) }}" class="upcoming-goal-title">{{ $goal->title }}</a>
                         <div class="upcoming-goal-meta">
@@ -117,9 +119,8 @@
                             @endif
                         </div>
                     </div>
-                    <div class="upcoming-deadline">
-                        <i class="bi bi-calendar3"></i>
-                        {{ $goal->deadline->format('d M') }}
+                    <div class="progress mt-2" style="height:5px">
+                        <div class="progress-bar bg-primary" style="width:{{ $goal->progress }}%"></div>
                     </div>
                 </div>
                 @empty
@@ -132,8 +133,38 @@
         </div>
     </div>
 
-    {{-- Recent Goals --}}
+    {{-- Group Deadlines --}}
     <div class="col-lg-6">
+        <div class="dash-card">
+            <div class="dash-card-header">
+                <h3><i class="bi bi-people text-secondary me-2"></i>Group Deadlines</h3>
+                <a href="{{ route('groups.index') }}" class="btn btn-sm btn-outline-primary">View All</a>
+            </div>
+            <div class="dash-card-body">
+                @forelse($upcomingGroupTasks as $assignment)
+                <div class="upcoming-goal-item deadline-item">
+                    <span class="urgency-dot urgency-secondary"></span>
+                    <div class="upcoming-goal-info">
+                        <a href="{{ route('groups.show', $assignment->task->group) }}" class="upcoming-goal-title">{{ $assignment->task->title }}</a>
+                        <div class="upcoming-goal-meta">
+                            <span>{{ $assignment->task->group->name }}</span>
+                            <span>{{ $assignment->task->deadline->format('d M Y') }}</span>
+                            <span class="text-muted">{{ $assignment->task->days_remaining }} days left</span>
+                        </div>
+                    </div>
+                </div>
+                @empty
+                <div class="empty-state-sm">
+                    <i class="bi bi-people"></i>
+                    <p>Join or create a group to see group deadlines</p>
+                </div>
+                @endforelse
+            </div>
+        </div>
+    </div>
+
+    {{-- Recent Goals --}}
+    <div class="col-lg-12">
         <div class="dash-card">
             <div class="dash-card-header">
                 <h3><i class="bi bi-clock-history me-2"></i>{{ __('messages.dashboard.recent') }}</h3>
@@ -184,14 +215,14 @@ new Chart(document.getElementById('statusChart'), {
         labels: ['Completed', 'In Progress', 'Pending', 'Cancelled'],
         datasets: [{
             data: [{{ $completedGoals }}, {{ $inProgressGoals }}, {{ $pendingGoals }}, {{ $cancelledGoals }}],
-            backgroundColor: ['#4ec9b0', '#007acc', '#dcdcaa', '#f44747'],
+            backgroundColor: ['#c0c1ff', '#6366f1', '#ffb783', '#ffb2b7'],
             borderWidth: 0,
         }]
     },
     options: {
         responsive: true,
         plugins: {
-            legend: { position: 'bottom', labels: { color: '#858585' } }
+            legend: { position: 'bottom', labels: { color: '#c7c4d7' } }
         },
         cutout: '70%',
     }
@@ -229,11 +260,11 @@ new Chart(document.getElementById('trendChart'), {
         datasets: [{
             label: 'Goals Created',
             data: trendData.map(d => d.total),
-            borderColor: '#007acc',
-            backgroundColor: 'rgba(0,122,204,0.1)',
+            borderColor: '#6366f1',
+            backgroundColor: 'rgba(99,102,241,0.12)',
             fill: true,
             tension: 0.4,
-            pointBackgroundColor: '#007acc',
+            pointBackgroundColor: '#c0c1ff',
         }]
     },
     options: {

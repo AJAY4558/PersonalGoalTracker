@@ -20,11 +20,11 @@
             @include('goals._form')  {{-- Shared form partial --}}
 
             <div class="form-actions mt-4">
-                <button type="submit" class="btn btn-primary btn-lg px-5">
-                    <i class="bi bi-check-circle me-2"></i>{{ __('messages.common.save') }} Goal
+                <button type="submit" class="btn btn-primary btn-lg px-5 shimmer-btn">
+                    <i class="bi bi-rocket-takeoff me-2"></i>DEPLOY OBJECTIVE
                 </button>
                 <a href="{{ route('goals.index') }}" class="btn btn-outline-secondary btn-lg">
-                    {{ __('messages.common.cancel') }}
+                    <i class="bi bi-power me-2"></i>Terminate Session
                 </a>
             </div>
         </form>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\GoalCompletedMail;
+use App\Models\AppNotification;
 use App\Models\Category;
 use App\Models\Goal;
 use App\Http\Requests\StoreGoalRequest;
@@ -210,6 +211,16 @@ class GoalController extends Controller
 
             ActivityLogService::log('goal.completed', "Goal completed: {$goal->title}", [
                 'goal_id' => $goal->id,
+            ]);
+
+            AppNotification::create([
+                'user_id' => Auth::id(),
+                'type' => 'goal_completed',
+                'data' => [
+                    'goal_id' => $goal->id,
+                    'goal_title' => $goal->title,
+                    'message' => "Goal completed: {$goal->title}",
+                ],
             ]);
         } else {
             ActivityLogService::log('goal.updated', "Goal updated: {$goal->title}", [

@@ -1,6 +1,6 @@
 {{-- Home / Landing Page --}}
 <!DOCTYPE html>
-<html lang="en">
+<html class="dark" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
     <title>Altair — Built for Ambition</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,100..700,0..1,0&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="landing-body">
@@ -31,27 +31,26 @@
     </nav>
 
     {{-- HERO SECTION --}}
-    <section class="hero-section">
+    <section class="hero-section tech-grid">
         <div class="container-xl">
             <div class="row align-items-center min-vh-100 py-5">
                 <div class="col-lg-6">
                     <span class="hero-badge">✨ Built for Ambition</span>
-                    <h1 class="hero-title">Reach Higher.</h1>
-                    <div class="hero-title-gradient">Achieve Everything.</div>
+                    <h1 class="hero-title shimmer-text">Master Your Ambition</h1>
                     <p class="hero-subtitle">
                         A powerful personal goal tracking system built with Laravel. Set deadlines,
                         track progress, stay motivated, and reach every milestone.
                     </p>
                     <div class="hero-actions">
                         @auth
-                            <a href="{{ route('dashboard') }}" class="btn btn-primary btn-lg me-3">
-                                <i class="bi bi-speedometer2 me-2"></i> Go to Dashboard
+                            <a href="{{ route('dashboard') }}" class="btn btn-primary btn-lg me-3 shimmer-btn inner-glow-primary">
+                                <i class="bi bi-speedometer2 me-2"></i> Go to Dashboard <span class="material-symbols-outlined">arrow_forward</span>
                             </a>
                         @else
-                            <a href="{{ route('register') }}" class="btn btn-primary btn-lg me-3">
-                                <i class="bi bi-rocket-takeoff me-2"></i> Start Tracking Free
+                            <a href="{{ route('register') }}" class="btn btn-primary btn-lg me-3 shimmer-btn inner-glow-primary">
+                                <i class="bi bi-rocket-takeoff me-2"></i> Start Tracking Free <span class="material-symbols-outlined">arrow_forward</span>
                             </a>
-                            <a href="{{ route('login') }}" class="btn btn-outline-light btn-lg">Login</a>
+                            <a href="{{ route('login') }}" class="btn btn-outline-light btn-lg obsidian-card">Login</a>
                         @endauth
                     </div>
                     <div class="hero-stats">
@@ -94,6 +93,45 @@
                                 <div class="preview-goal pending">⏳ Get AWS Certification</div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- BENTO COCKPIT --}}
+    <section class="cockpit-section py-5">
+        <div class="container-xl">
+            <h2 class="section-title text-center mb-4">Mission Cockpit</h2>
+            <div class="cockpit-grid">
+                <div class="cockpit-card cockpit-large obsidian-card">
+                    <div class="cockpit-kicker">Execution Fidelity</div>
+                    <div class="cockpit-number">98.4%</div>
+                    <div class="cockpit-bars">
+                        @foreach([34,62,48,76,92,68,84,56,96,72,88,64] as $height)
+                            <span style="height: {{ $height }}%"></span>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="cockpit-card obsidian-card">
+                    <div class="cockpit-kicker">Milestone Relay</div>
+                    <h3>3 protocols active</h3>
+                    <p>Priority streaks, deadline checks, and focus windows stay visible without noise.</p>
+                    <div class="avatar-stack">
+                        <span>A</span><span>L</span><span>X</span>
+                    </div>
+                </div>
+                <div class="cockpit-card obsidian-card">
+                    <span class="material-symbols-outlined ghost-icon">bolt</span>
+                    <div class="cockpit-kicker">Velocity Engine</div>
+                    <h3>Adaptive pacing</h3>
+                    <p>Keep progress, priority, and category signals close to every objective.</p>
+                </div>
+                <div class="cockpit-card cockpit-wide obsidian-card cockpit-image">
+                    <div>
+                        <div class="cockpit-kicker">Strategic Surface</div>
+                        <h3>Plan, track, complete, repeat.</h3>
+                        <p>Altair Lux turns every goal into a compact operational dashboard.</p>
                     </div>
                 </div>
             </div>

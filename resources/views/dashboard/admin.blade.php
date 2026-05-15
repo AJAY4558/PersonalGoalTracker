@@ -10,6 +10,17 @@
     </div>
 </div>
 
+<div class="obsidian-card mb-4 admin-groups-panel">
+    <div>
+        <p class="lux-eyebrow">Primary Workspace</p>
+        <h2>Groups System</h2>
+        <p class="text-muted">Create shared objective groups, invite members, and assign collaborative tasks without changing existing admin user stats.</p>
+    </div>
+    <a href="{{ route('groups.index') }}" class="btn btn-primary lux-indigo-btn">
+        <i class="bi bi-people me-2"></i>Open Groups Hub
+    </a>
+</div>
+
 <div class="row g-3 mb-4">
     <div class="col-sm-6 col-xl-3">
         <div class="stat-card blue">

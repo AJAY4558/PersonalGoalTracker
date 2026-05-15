@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Goal;
+use App\Models\GroupTaskAssignment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -46,11 +47,25 @@ class DashboardController extends Controller
             : 0;
 
         // === UPCOMING DEADLINES (next 7 days) ===
-        $upcomingGoals = Goal::where('user_id', $userId)
+        $upcomingPersonalGoals = Goal::where('user_id', $userId)
             ->upcoming()
             ->orderBy('deadline')
             ->take(5)
             ->get();
+
+        $upcomingGroupTasks = GroupTaskAssignment::query()
+            ->with(['task.group'])
+            ->where('user_id', $userId)
+            ->where('status', '!=', 'completed')
+            ->whereHas('task', function ($query) {
+                $query->where('status', '!=', 'completed')
+                    ->whereNotNull('deadline')
+                    ->where('deadline', '>=', now())
+                    ->where('deadline', '<=', now()->addDays(7));
+            })
+            ->get()
+            ->sortBy(fn ($assignment) => $assignment->task->deadline)
+            ->take(5);
 
         // === RECENT GOALS ===
         $recentGoals = Goal::where('user_id', $userId)
@@ -88,7 +103,8 @@ class DashboardController extends Controller
             'cancelledGoals',
             'avgProgress',
             'completionRate',
-            'upcomingGoals',
+            'upcomingPersonalGoals',
+            'upcomingGroupTasks',
             'recentGoals',
             'goalsByCategory',
             'goalsByMonth'
